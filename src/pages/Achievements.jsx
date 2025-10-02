@@ -3,6 +3,7 @@ import Navbar from "../components/Navbar";
 
 import { useAuth } from "../context/AuthContext";
 import { TrophyIcon, StarIcon, FireIcon, AcademicCapIcon, ClockIcon } from "@heroicons/react/24/solid";
+import { API_URL } from '../config';
 
 // A small helper component for the progress bar
 const ProgressBar = ({ progress }) => (
@@ -22,7 +23,7 @@ export default function Achievements() {
   useEffect(() => {
     const fetchAllAchievements = async () => {
       try {
-        const response = await fetch('http://localhost:8000/api/achievements');
+        const response = await fetch(`${API_URL}/api/achievements`);
         const data = await response.json();
         setAllAchievements(data);
       } catch (error) {

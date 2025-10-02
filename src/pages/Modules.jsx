@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { useAuth } from "../context/AuthContext";
+import { API_URL } from '../config';
 import { 
   CodeBracketIcon, 
   UserGroupIcon, 
@@ -27,7 +28,7 @@ export default function Modules() {
   useEffect(() => {
     const fetchModules = async () => {
       try {
-        const response = await fetch('http://localhost:8000/api/modules');
+        const response = await fetch(`${API_URL}/api/modules`);
         if (!response.ok) {
           throw new Error('Failed to fetch modules');
         }

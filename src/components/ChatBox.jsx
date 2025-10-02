@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 import io from "socket.io-client";
 import { useAuth } from '../context/AuthContext';
+import { API_URL } from '../config';
 
-const socket = io("http://localhost:8000");
+const socket = io(API_URL);
 
 export default function ChatBox() {
   const [username, setUsername] = useState("");
@@ -15,7 +16,7 @@ export default function ChatBox() {
     const fetchHistory = async () => {
       if (token) {
         try {
-          const response = await fetch('http://localhost:8000/api/chat/messages', {
+          const response = await fetch(`${API_URL}/api/chat/messages`, {
             headers: { 'Authorization': `Bearer ${token}` }
           });
           if (!response.ok) throw new Error("Failed to fetch chat history");

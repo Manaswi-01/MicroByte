@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import Navbar from '../../components/Navbar';
+import { API_URL } from '../config';
 import Footer from '../../components/Footer';
 
 export default function AdminDashboard() {
@@ -20,7 +21,7 @@ export default function AdminDashboard() {
     const fetchModules = async () => {
       setIsLoading(true);
       try {
-        const response = await fetch('http://localhost:8000/api/modules');
+        const response = await fetch('${API_URL}/api/modules');
         if (!response.ok) {
           throw new Error('Failed to fetch modules');
         }
@@ -41,7 +42,7 @@ export default function AdminDashboard() {
     }
 
     try {
-      const response = await fetch(`http://localhost:8000/api/modules/${moduleId}`, {
+      const response = await fetch(`${API_URL}/api/modules/${moduleId}`, {
         method: 'DELETE',
         headers: {
           'Authorization': `Bearer ${token}`

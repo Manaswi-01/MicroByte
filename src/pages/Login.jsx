@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import { useAuth } from "../context/AuthContext";
+import { API_URL } from '../config';
 import { 
   EyeIcon, 
   EyeSlashIcon, 
@@ -30,7 +31,7 @@ export default function Login() {
     setIsLoading(true);
     setError(null);
 
-    const endpoint = isLogin ? 'http://localhost:8000/api/users/login' : 'http://localhost:8000/api/users';
+    const endpoint = isLogin ? `${API_URL}/api/users/login` : `${API_URL}/api/users`;
     
     try {
       const response = await fetch(endpoint, {

@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import Navbar from '../components/Navbar';
+import { API_URL } from '../config';
 import Footer from '../components/Footer';
 
 export default function ModuleViewer() {
@@ -27,7 +28,7 @@ export default function ModuleViewer() {
       setError(null);
       try {
         // We still fetch module data from the backend, but we don't store it in state
-        const response = await fetch(`http://localhost:8000/api/lessons/by-module/${moduleId}`, {
+        const response = await fetch(`${API_URL}/api/lessons/by-module/${moduleId}`, {
           headers: { 'Authorization': `Bearer ${token}` }
         });
         if (!response.ok) throw new Error('Could not fetch content.');
@@ -48,7 +49,7 @@ export default function ModuleViewer() {
 
   const handleMarkAsComplete = async () => {
     try {
-      const response = await fetch(`http://localhost:8000/api/progress/modules/${moduleId}/complete`, {
+      const response = await fetch(`${API_URL}/api/progress/modules/${moduleId}/complete`, {
         method: 'POST',
         headers: { 'Authorization': `Bearer ${token}` }
       });

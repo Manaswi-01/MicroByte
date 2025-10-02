@@ -3,6 +3,7 @@ import { useNavigate, useParams, Link } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
+import { API_URL } from '../config';
 
 export default function EditModule() {
   const [moduleData, setModuleData] = useState({ title: '', description: '', category: '', level: '' });
@@ -28,7 +29,7 @@ export default function EditModule() {
       setIsLoading(true);
       setError(null);
       try {
-        const response = await fetch(`http://localhost:8000/api/lessons/by-module/${moduleId}`, {
+        const response = await fetch(`${API_URL}/api/lessons/by-module/${moduleId}`, {
           headers: { 'Authorization': `Bearer ${token}` }
         });
         if (!response.ok) throw new Error('Failed to fetch module content.');
@@ -60,7 +61,7 @@ export default function EditModule() {
     setIsSaving(true);
     setError(null);
     try {
-      const response = await fetch(`http://localhost:8000/api/modules/${moduleId}`, {
+      const response = await fetch(`${API_URL}/api/modules/${moduleId}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
         body: JSON.stringify(moduleData)
@@ -87,7 +88,7 @@ export default function EditModule() {
     }
 
     try {
-      const response = await fetch('http://localhost:8000/api/lessons', {
+      const response = await fetch(`${API_URL}/api/lessons`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
         body: JSON.stringify({
@@ -110,7 +111,7 @@ export default function EditModule() {
   const handleDeleteLesson = async (lessonId) => {
     if (!window.confirm("Are you sure you want to delete this lesson?")) return;
     try {
-      const response = await fetch(`http://localhost:8000/api/lessons/${lessonId}`, {
+      const response = await fetch(`${API_URL}/api/lessons/${lessonId}`, {
         method: 'DELETE',
         headers: { 'Authorization': `Bearer ${token}` }
       });

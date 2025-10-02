@@ -1,4 +1,5 @@
 import { createContext, useContext, useState, useEffect, useMemo, useCallback } from 'react';
+import { API_URL } from '../config';
 
 const AuthContext = createContext();
 
@@ -11,7 +12,7 @@ export function AuthProvider({ children }) {
   const fetchProgress = useCallback(async (userToken) => {
     if (!userToken) return;
     try {
-      const response = await fetch('http://localhost:8000/api/progress', {
+      const response = await fetch(`${API_URL}/api/progress`, {
         headers: { 'Authorization': `Bearer ${userToken}` }
       });
       const data = await response.json();

@@ -1,11 +1,11 @@
-name: Deploy Full-Stack Application
+name: Build and Push Docker Images
 
 on:
   push:
     branches: [ "main" ]
 
 jobs:
-  build-and-push-backend:
+  build-and-push-images:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -22,26 +22,11 @@ jobs:
         with:
           context: ./backend
           push: true
-          # IMPORTANT: Replace the placeholder with your Docker Hub username
           tags: manaswi01/microbyte-backend:latest
-
-  build-and-push-frontend:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Log in to Docker Hub
-        uses: docker/login-action@v2
-        with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Build and push frontend image
         uses: docker/build-push-action@v4
         with:
-          # FIX: The context path is now lowercase 'frontend'
           context: .
           push: true
-          # IMPORTANT: Replace the placeholder with your Docker Hub username
           tags: manaswi01/microbyte-frontend:latest

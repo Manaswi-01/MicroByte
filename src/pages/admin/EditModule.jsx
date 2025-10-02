@@ -3,7 +3,7 @@ import { useNavigate, useParams, Link } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
-import { API_URL } from '../config';
+import { API_URL } from '../../config';
 
 export default function EditModule() {
   const [moduleData, setModuleData] = useState({ title: '', description: '', category: '', level: '' });

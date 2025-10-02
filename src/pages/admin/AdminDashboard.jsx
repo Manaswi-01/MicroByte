@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import Navbar from '../../components/Navbar';
-import { API_URL } from '../config';
+import { API_URL } from '../../config';
 import Footer from '../../components/Footer';
 
 export default function AdminDashboard() {

@@ -41,7 +41,7 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           # FIX: The context path is now lowercase 'frontend'
-          context: ./frontend
+          context: .
           push: true
           # IMPORTANT: Replace the placeholder with your Docker Hub username
           tags: manaswi01/microbyte-frontend:latest

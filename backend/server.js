@@ -18,15 +18,30 @@ const chatRoutes = require('./routes/chatRoutes');
 
 const app = express();
 const server = http.createServer(app);
+
+// --- THIS IS THE FIX ---
+// Define the origins that are allowed to connect
+const allowedOrigins = [
+  'http://localhost:5173',    // Your local frontend for development
+  process.env.FRONTEND_URL    // Your live Vercel URL for production
+];
+
+// Set up CORS for Express API routes
+const corsOptions = {
+  origin: allowedOrigins
+};
+app.use(cors(corsOptions));
+
+// Set up CORS for Socket.IO
 const io = new Server(server, {
   cors: {
-    origin: "http://localhost:5173", // Your frontend URL
+    origin: allowedOrigins,
     methods: ["GET", "POST"]
   }
 });
+// --------------------
 
 // Middleware
-app.use(cors());
 app.use(express.json());
 
 // API Routes
@@ -46,17 +61,13 @@ app.get('/', (req, res) => {
 io.on('connection', (socket) => {
   console.log(`A user connected: ${socket.id}`);
 
-  // Listen for a 'sendMessage' event
   socket.on('sendMessage', async (messageData) => {
     try {
-      // Create a new message document and save it to the database
       const newMessage = new Message({
         text: messageData.text,
         sender: messageData.sender
       });
       await newMessage.save();
-
-      // Broadcast the message to all connected clients
       io.emit('receiveMessage', messageData);
     } catch (error) {
       console.error('Error saving message:', error);

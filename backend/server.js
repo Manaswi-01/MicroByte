@@ -52,6 +52,15 @@ app.use('/api/progress', progressRoutes);
 app.use('/api/lessons', lessonRoutes);
 app.use('/api/chat', chatRoutes);
 
+// --- TEMPORARY DEBUG ROUTE ---
+app.get('/debug-env', (req, res) => {
+  res.json({
+    FRONTEND_URL: process.env.FRONTEND_URL || null,
+    MONGO_URI_IS_SET: !!process.env.MONGO_URI,
+    JWT_SECRET_IS_SET: !!process.env.JWT_SECRET
+  });
+});
+
 // Test Route
 app.get('/', (req, res) => {
   res.send('Backend server is running!');

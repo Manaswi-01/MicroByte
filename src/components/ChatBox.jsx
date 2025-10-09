@@ -3,7 +3,7 @@ import io from "socket.io-client";
 import { useAuth } from '../context/AuthContext';
 import { API_URL } from '../config';
 
-const socket = io(API_URL);
+const socket = io(import.meta.env.VITE_BACKEND_URL);
 
 export default function ChatBox() {
   const [username, setUsername] = useState("");

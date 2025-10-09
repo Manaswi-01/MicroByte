@@ -21,7 +21,7 @@ export default function AdminDashboard() {
     const fetchModules = async () => {
       setIsLoading(true);
       try {
-        const response = await fetch('${API_URL}/api/modules');
+        const response = await fetch(`${API_URL}/api/modules`);
         if (!response.ok) {
           throw new Error('Failed to fetch modules');
         }

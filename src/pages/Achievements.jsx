@@ -39,7 +39,7 @@ export default function Achievements() {
   const stats = [
     { label: "Total Points", value: progress?.points || 0, icon: StarIcon, color: "text-yellow-400" },
     { label: "Achievements", value: `${progress?.unlockedAchievements?.length || 0}/${allAchievements.length}`, icon: TrophyIcon, color: "text-purple-400" },
-    { label: "Learning Streak", value: "12 days", icon: FireIcon, color: "text-orange-400" }, // This is static for now
+   
     { label: "Modules Completed", value: progress?.completedModules?.length || 0, icon: AcademicCapIcon, color: "text-blue-400" }
   ];
 
@@ -60,7 +60,7 @@ export default function Achievements() {
           <p className="text-lg text-slate-600 dark:text-slate-400 mt-2">
             Celebrate your learning milestones and track your progress
           </p>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 max-w-4xl mx-auto mt-8">
+          <div className="grid grid-cols-3 gap-4 md:gap-6 max-w-2xl mx-auto mt-8">
             {stats.map((stat, idx) => {
               const Icon = stat.icon;
               return (
